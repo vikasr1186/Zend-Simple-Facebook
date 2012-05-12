@@ -9,18 +9,18 @@ Both were lacking either beauty of code or were just incomplete. So after whole 
 
 In your application.ini add this:
 
-    ; ------------------------------------------  
-    ; Facebook library  
-    ; ------------------------------------------  
-    autoloaderNamespaces.Facebook = "Facebook_"  
-  
-    facebook.appId = "<Facebook appId>"  
-    facebook.secret = "<Facebook appSecret>"  
+    ; ------------------------------------------
+    ; Facebook library
+    ; ------------------------------------------
+    autoloaderNamespaces.Facebook = "Facebook_"
+
+    facebook.appId = "<Facebook appId>"
+    facebook.secret = "<Facebook appSecret>"
     facebook.permissions = "<List of permissions to request (comma separated)>"
     facebook.redirectUrl = "<Callback URL after sign in>"
 
-To utilise adapter you could start with in  
-..application/controller/AuthController.php  
+To utilise adapter you could start with in
+..application/controller/AuthController.php
 
     <?php
 
@@ -31,7 +31,7 @@ To utilise adapter you could start with in
         {
             $adapter = new Facebook_Auth_Adapter();
             $token   = $this->_getParam('code');
-    
+
             if($token) {
                 $auth = Zend_Auth::getInstance();
                 $adapter->setToken($token);
@@ -78,11 +78,3 @@ Please, DO CONTRIBUTE. If you find some inconsistencies, any possible features, 
 
 Author of this software is Laurynas Karvelis <laurynas.karvelis@gmail.com> working @ Explosive Brains Ltd.
 Released under "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE" <http://sam.zoy.org/wtfpl/COPYING>
-
-Feedback
---------
-
-We are relying on the [GitHub issues tracker][issues] linked from above for
-feedback. File bugs or other issues [here][issues].
-
-[issues]: http://github.com/fordnox/Zend_Auth_Adapter_Facebook/issues
