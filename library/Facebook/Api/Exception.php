@@ -5,13 +5,11 @@
  * @author  Explosive Brains Limited
  * @license http://sam.zoy.org/wtfpl/COPYING
  */
-
 class Facebook_Api_Exception extends Exception
 {
     /**
      * @var array The result from the API server that represents the exception information.
      */
-
     protected $_result;
 
     /**
@@ -19,7 +17,6 @@ class Facebook_Api_Exception extends Exception
      *
      * @param array $result The result from the API server
      */
-
     public function __construct($result)
     {
         $this->_result = $result;
@@ -32,7 +29,6 @@ class Facebook_Api_Exception extends Exception
      * @param void
      * @return array The result from the API server
      */
-
     public function getResult()
     {
         return $this->_result;
@@ -45,10 +41,11 @@ class Facebook_Api_Exception extends Exception
      * @param void
      * @return string
      */
-
     public function getType()
     {
-        return isset($this->_result['type']) ? $this->_result['type'] : 'Exception';
+        return isset($this->_result['type'])
+            ? $this->_result['type']
+            : 'Exception';
     }
 
     /**
@@ -57,11 +54,10 @@ class Facebook_Api_Exception extends Exception
      * @param void
      * @return string The string representation of the error
      */
-
     public function __toString()
     {
         $str = $this->getType() . ': ';
-        if($this->code != 0) {
+        if ($this->code != 0) {
             $str .= $this->code . ': ';
         }
         return $str . $this->message;

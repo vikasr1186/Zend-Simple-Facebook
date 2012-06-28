@@ -5,43 +5,36 @@
  * @author  Explosive Brains Limited
  * @license http://sam.zoy.org/wtfpl/COPYING
  */
-
 class Facebook_Config
 {
     /**
      * @var string Facebook Application Id
      */
-
     private $_appId;
 
     /**
      * @var string Facebook Application Secret
      */
-
     private $_appSecret;
 
     /**
      * @var string App's Redirect URL
      */
-
     private $_redirectUrl;
 
     /**
      * @var string App Permissions
      */
-
     private $_permissions;
 
     /**
      * @var string Access Token for this user
      */
-
     private $_accessToken;
 
     /**
      * @var string Token for this user
      */
-
     private $_token;
 
     /**
@@ -50,7 +43,6 @@ class Facebook_Config
      * @param void
      * @return Facebook_Config
      */
-
     public function __construct()
     {
         $config = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getOption('facebook');
@@ -64,19 +56,18 @@ class Facebook_Config
      * @return Facebook_Config
      * @throws Facebook_Config_Exception
      */
-
     public function setOptions(array $options)
     {
         $requiredProperties = array('appId', 'appSecret', 'redirectUrl', 'permissions');
 
-        foreach($requiredProperties as $property) {
-            if(empty($options[$property])) {
+        foreach ($requiredProperties as $property) {
+            if (empty($options[$property])) {
                 throw new Facebook_Config_Exception('Required value for param facebook.' . $property . ' is missing in application.ini');
             }
         }
 
-        foreach($options as $key => $value) {
-            if(property_exists($this, '_' . $key)) {
+        foreach ($options as $key => $value) {
+            if (property_exists($this, '_' . $key)) {
                 $setter = 'set' . ucfirst($key);
                 $this->{$setter}($value);
             }
@@ -91,7 +82,6 @@ class Facebook_Config
      * @param string $appId
      * @return Facebook_Config
      */
-
     public function setAppId($appId)
     {
         $this->_appId = (string) $appId;
@@ -104,7 +94,6 @@ class Facebook_Config
      * @param void
      * @return string
      */
-
     public function getAppId()
     {
         return $this->_appId;
@@ -116,7 +105,6 @@ class Facebook_Config
      * @param string $appSecret
      * @return Facebook_Config
      */
-
     public function setAppSecret($appSecret)
     {
         $this->_appSecret = (string) $appSecret;
@@ -129,7 +117,6 @@ class Facebook_Config
      * @param void
      * @return string
      */
-
     public function getAppSecret()
     {
         return $this->_appSecret;
@@ -141,7 +128,6 @@ class Facebook_Config
      * @param string $permissions
      * @return Facebook_Config
      */
-
     public function setPermissions($permissions)
     {
         $this->_permissions = (string) $permissions;
@@ -154,7 +140,6 @@ class Facebook_Config
      * @param void
      * @return string
      */
-
     public function getPermissions()
     {
         return $this->_permissions;
@@ -166,7 +151,6 @@ class Facebook_Config
      * @param string $redirectUrl
      * @return Facebook_Config
      */
-
     public function setRedirectUrl($redirectUrl)
     {
         $this->_redirectUrl = (string) $redirectUrl;
@@ -179,7 +163,6 @@ class Facebook_Config
      * @param void
      * @return string
      */
-
     public function getRedirectUrl()
     {
         return $this->_redirectUrl;
@@ -191,7 +174,6 @@ class Facebook_Config
      * @param string $accessToken
      * @return Facebook_Config
      */
-
     public function setAccessToken($accessToken)
     {
         $this->_accessToken = (string) $accessToken;
@@ -204,7 +186,6 @@ class Facebook_Config
      * @param void
      * @return string
      */
-
     public function getAccessToken()
     {
         return $this->_accessToken;
@@ -216,7 +197,6 @@ class Facebook_Config
      * @param string $token
      * @return Facebook_Config
      */
-
     public function setToken($token)
     {
         $this->_token = (string) $token;
@@ -229,7 +209,6 @@ class Facebook_Config
      * @param void
      * @return string
      */
-
     public function getToken()
     {
         return $this->_token;

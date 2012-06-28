@@ -5,19 +5,16 @@
  * @author  Explosive Brains Limited
  * @license http://sam.zoy.org/wtfpl/COPYING
  */
-
 class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
 {
     /**
      * @var Facebook_Config
      */
-
     private $_config;
 
     /**
      * @var Zend_Session_Namespace The place were our secret "state" will be stored
      */
-
     private $_session;
 
     /**
@@ -26,7 +23,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @throws Zend_Auth_Exception
      * @return Facebook_Auth_Adapter
      */
-
     public function __construct()
     {
         $this->setConfig(new Facebook_Config());
@@ -39,7 +35,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param void
      * @return Facebook_Config
      */
-
     public function getConfig()
     {
         return $this->_config;
@@ -51,7 +46,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param Facebook_Config $config
      * @return Facebook_Auth_Adapter
      */
-
     public function setConfig(Facebook_Config $config)
     {
         $this->_config = $config;
@@ -64,7 +58,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param string $token
      * @return void
      */
-
     public function setToken($token)
     {
         $this->getConfig()->setToken($token);
@@ -76,7 +69,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param void
      * @return void
      */
-
     private function _generateState()
     {
         $this->_session->state = md5(uniqid(rand(), TRUE) . $this->getConfig()->getAppId());
@@ -88,7 +80,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param void
      * @return string
      */
-
     private function _getState()
     {
         return $this->_session->state;
@@ -100,10 +91,9 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param void
      * @return Zend_Auth_Result
      */
-
     public function authenticate()
     {
-        if(!strlen($this->getConfig()->getToken())) {
+        if (!strlen($this->getConfig()->getToken())) {
             // token was not provided
             return new Zend_Auth_Result(
                 Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID,
@@ -112,7 +102,7 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
             );
         }
 
-        if($_REQUEST['state'] === $this->_getState()) {
+        if ($_REQUEST['state'] === $this->_getState()) {
             // state is OK
             try {
                 $api = new Facebook_Api_Base();
@@ -122,7 +112,7 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
                 $this->getConfig()->setAccessToken($accessToken);
 
                 $result = new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, $accessToken);
-            } catch(Facebook_Exception $e) {
+            } catch (Facebook_Exception $e) {
                 $result = new Zend_Auth_Result(
                     Zend_Auth_Result::FAILURE,
                     false,
@@ -150,7 +140,6 @@ class Facebook_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @param void
      * @return void
      */
-
     public function redirect()
     {
         // generate new state and save it for authentication
