@@ -15,7 +15,7 @@ In your application.ini add this:
     autoloaderNamespaces.Facebook = "Facebook_"
 
     facebook.appId = "<Facebook appId>"
-    facebook.secret = "<Facebook appSecret>"
+    facebook.appSecret = "<Facebook appSecret>"
     facebook.permissions = "<List of permissions to request (comma separated)>"
     facebook.redirectUrl = "<Callback URL after sign in>"
 
@@ -38,6 +38,9 @@ To utilise adapter you could start with in
                 $result = $auth->authenticate($adapter);
 
                 if($result->isValid()) {
+                    // LOOK HERE - AS THIS WILL BE YOUR ACCESS_TOKEN
+                    var_dump(Zend_Auth::getInstance()->getIdentity());
+                
                     // successful login, redirect to profile page
                     $this->_helper->redirector('index', 'profile');
                 } else {
