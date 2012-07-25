@@ -38,9 +38,6 @@ To utilise adapter you could start with in
                 $result = $auth->authenticate($adapter);
 
                 if($result->isValid()) {
-                    // LOOK HERE - AS THIS WILL BE YOUR ACCESS_TOKEN
-                    var_dump(Zend_Auth::getInstance()->getIdentity());
-                
                     // successful login, redirect to profile page
                     $this->_helper->redirector('index', 'profile');
                 } else {
@@ -54,12 +51,16 @@ To utilise adapter you could start with in
     }
 
 To do any Facebook Graph API calls:
-    <?php
+
+	<?php
 
     class ProfileController extends Zend_Controller_Action
     {
         public function indexAction()
             $facebook = new Facebook_Api();
+            
+            // as Facebook Auth adapter is saving 'access_token' as Zend_Auth's identity, we need to pass it through into Facebook_Api each new instance
+            $facebook->getConfig()->setAccessToken(Zend_Auth::getInstance()->getIdentity());
 
             try{
                 var_dump($facebook->getProfile());
